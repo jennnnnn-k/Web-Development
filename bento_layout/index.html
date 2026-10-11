@@ -8,6 +8,9 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <style>
+        * {
+            transition: all 0.3s ease-in-out;
+        }
         body {
             background-image: url('assets/img/bg.jpg');
             background-size: cover;
@@ -31,24 +34,28 @@
 
 <body>
     <div class="container-fluid">
-        <div class="h1 text-center my-4">Bento Layout</div>
+        <div class="row d-flex align-items-center" style="background: black;">
+            <div class="col-6 p-3">
+                <div class="h3 text-white">Bento Layout</div>
+            </div>
+        </div>
 
-        <div class="card shadow p-3" style="min-height: 80vh;" id="border">
+        <div class="card shadow p-3 m-5" id="border">
             <div class="d-flex flex-column row-gap-3">
 
                 <!-- 1st row -->
-                <div class="row" style="min-height: 20vh;">
-                    <div class="col-6">
+                <div class="row g-3">
+                    <div class="col-lg-6 col-sm-12">
                         <div class="card p-3 h-100">
 
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-lg-3 col-sm-6">
                         <div class="card p-3 h-100">
 
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-lg-3 col-sm-6">
                         <div class="card p-3 h-100">
 
                         </div>
@@ -56,7 +63,7 @@
                 </div>
 
                 <!-- 2nd row -->
-                <div class="row" style="min-height: 40vh;">
+                <div class="row">
                     <div class="col-3 d-flex flex-column gap-3">
 
                         <!-- row 2.1 -->
@@ -78,29 +85,29 @@
                     <div class="col-3 d-flex flex-column gap-3">
 
                         <!-- row 2.2 -->
-                            <div class="d-flex gap-3 flex-fill">
-                                <div class="card p-3 w-50">
+                        <div class="d-flex gap-3 flex-fill">
+                            <div class="card p-3 w-50">
 
-                                </div>
-                                <div class="card p-3 w-50">
-
-                                </div>
                             </div>
+                            <div class="card p-3 w-50">
 
-                            <div class="d-flex gap-3 flex-fill">
-                                <div class="card p-3 w-50">
-
-                                </div>
-                                <div class="card p-3 w-50">
-                                    
-                                </div>
                             </div>
+                        </div>
+
+                        <div class="d-flex gap-3 flex-fill">
+                            <div class="card p-3 w-50">
+
+                            </div>
+                            <div class="card p-3 w-50">
+
+                            </div>
+                        </div>
 
                     </div>
                 </div>
 
                 <!-- 3rd row -->
-                <div class="row" style="min-height: 20vh;">
+                <div class="row">
                     <div class="col-12">
                         <div class="card p-3 h-100">
 
