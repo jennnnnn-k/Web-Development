@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bento Layout</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="navbar navbar-expand-lg px-3">
+        <div class="navbar-brand">
+            Genshin Impact
+        </div>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+            aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNav">
+            <div class="navbar-nav mb-2 mb-lg-0 gap-lg-3">
+                <a class="nav-link active" href="#">Home</a>
+                <a class="nav-link" href="#">Elements</a>
+                <a class="nav-link" href="#">Weapons</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card shadow p-3 my-3">
+            <div class="card-img">
+                <img src="" alt="">
+            </div>
+            <div class="card-title h2 text-center">Elements</div>
+            <hr>
+            <div class="card-body"></div>
+        </div>
+        <div class="row g-3" id="paElement">
+            <!-- element -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script>
+        // https://dotesports.com/genshin-impact/guides/elemental-reactions-explainer (source)
+        var element = [
+            {
+                name: "Anemo",
+                svg: "Element_Anemo",
+                reactions: ["Stellar-Swirl", "Swirl"],
+                description: "Anemo does not leave a persistent aura on enemies but instead spreads existing elements through Swirl. It can Swirl Pyro, Hydro, Cryo, and Electro, spreading their effects to nearby enemies and dealing additional elemental damage."
+            },
+            {
+                name: "Cryo",
+                svg: "Element_Cryo",
+                reactions: ["Crystallize", "Frozen", "Lunar-Crystallize", "Melt", "Stellar-Conduct", "Superconduct", "Swirl"],
+                description: "Cryo applies Cryo to enemies and is useful for freezing opponents and increasing damage. It triggers Melt (Cryo + Pyro), which increases damage; Superconduct (Cryo + Electro), which deals AoE Cryo damage and reduces Physical RES; and Frozen (Cryo + Hydro), which immobilizes enemies. Frozen enemies can also trigger Shatter when hit by blunt attacks, dealing Physical damage."
+            },
+            {
+                name: "Dendro",
+                svg: "Element_Dendro",
+                reactions: ["Aggravate", "Bloom", "Burning", "Burgeon", "Hyperbloom", "Lunar-Bloom", "Quicken", "Spread"],
+                description: "Dendro interacts with Pyro, Hydro, and Electro to trigger several reactions. It triggers Burning (Dendro + Pyro), which deals continuous Pyro damage; Bloom (Dendro + Hydro), which creates Dendro Cores; and Quicken (Dendro + Electro), which enables Aggravate and Spread to increase Electro and Dendro damage, respectively. Bloom can also trigger Hyperbloom (Dendro Core + Electro), which creates homing projectiles, and Burgeon (Dendro Core + Pyro), which causes the cores to explode."
+            },
+            {
+                name: "Electro",
+                svg: "Element_Electro",
+                reactions: ["Aggravate", "Crystallize", "Electrocharged", "Hyperbloom", "Lunar-Charged", "Overloaded", "Quicken", "Spread", "Stellar-Conduct", "Superconduct", "Swirl"],
+                description: "Electro applies Electro to enemies and supports several elemental reactions. It triggers Overloaded (Electro + Pyro), which causes an explosion; Electro-Charged (Electro + Hydro), which deals continuous Electro damage; and Superconduct (Electro + Cryo), which deals AoE Cryo damage and reduces Physical RES. With Dendro, it triggers Quicken, which enables Aggravate to increase Electro damage and Spread to increase Dendro damage."
+            },
+            {
+                name: "Geo",
+                svg: "Element_Geo",
+                reactions: ["Crystallize", "Lunar-Crystallize"],
+                description: "Geo triggers Crystallize when combined with Pyro, Hydro, Electro, or Cryo, creating elemental shards that provide shields when collected. Although it cannot be Swirled and has limited elemental reactions, it is useful for defensive teams because of its shielding capabilities."
+            },
+            {
+                name: "Hydro",
+                svg: "Element_Hydro",
+                reactions: ["Bloom", "Crystallize", "Electrocharged", "Frozen", "Lunar-Bloom", "Lunar-Charged", "Lunar-Crystallize", "Vaporize"],
+                description: "Hydro applies the Wet status to enemies and enables reactions such as Vaporize (Hydro + Pyro), which increases damage; Electro-Charged (Hydro + Electro), which deals continuous Electro damage; Frozen (Hydro + Cryo), which immobilizes enemies; and Bloom (Hydro + Dendro), which creates Dendro Cores that can explode or trigger additional reactions."
+            },
+            {
+                name: "Pyro",
+                svg: "Element_Pyro",
+                reactions: ["Burning", "Burgeon", "Crystallize", "Melt", "Overloaded", "Swirl", "Vaporize"],
+                description: "Pyro applies the Burning effect to enemies and is one of the main elements for dealing damage. It triggers reactions such as Vaporize (Pyro + Hydro), which increases damage; Melt (Pyro + Cryo), which increases damage; Overloaded (Pyro + Electro), which causes an explosion; and Burning (Pyro + Dendro), which deals continuous Pyro damage."
+            }
+        ];
+
+        var reaction = [
+            {
+                name: "Aggravate",
+                element: ["Dendro", "Electro"],
+                effect: "This adds bonus damage to Electro attacks against enemies affected by Quicken.",
+                type: "Amplifying"
+            },
+            {
+                name: "Bloom",
+                element: ["Dendro", "Hydro"],
+                effect: "This creates Dendro Cores that remain on the battlefield before exploding and dealing AoE Dendro damage.",
+                type: "Transformative"
+            },
+            {
+                name: "Burning",
+                element: ["Dendro", "Pyro"],
+                effect: "This deals continuous Pyro damage to affected enemies.",
+                type: "Transformative"
+            },
+            {
+                name: "Burgeon",
+                element: ["Dendro Core", "Pyro"],
+                effect: "This causes Dendro Cores to explode, dealing AoE Dendro damage.",
+                type: "Transformative"
+            },
+            {
+                name: "Crystallize",
+                element: ["Cryo", "Electro", "Geo", "Hydro", "Pyro"],
+                effect: "This creates an elemental shard that provides a shield when collected.",
+                type: "Defensive"
+            },
+            {
+                name: "Electrocharged",
+                element: ["Electro", "Hydro"],
+                effect: "This deals Electro damage over time and allows Hydro and Electro auras to coexist.",
+                type: "Transformative"
+            },
+            {
+                name: "Frozen",
+                element: ["Cryo", "Hydro"],
+                effect: "This immobilizes most non-boss enemies and can trigger Shatter when hit by Claymore, Geo, or Plunge attacks.",
+                type: "Crowd Control"
+            },
+            {
+                name: "Hyperbloom",
+                element: ["Dendro Core", "Electro"],
+                effect: "This transforms Dendro Cores into homing projectiles that deal Dendro damage.",
+                type: "Transformative"
+            },
+            {
+                name: "Lunar-Bloom",
+                element: ["Dendro", "Hydro"],
+                effect: "This is a Lunar reaction activated through specific character passives and scales with Elemental Mastery.",
+                type: "Lunar"
+            },
+            {
+                name: "Lunar-Charged",
+                element: ["Electro", "Hydro"],
+                effect: "This is a Lunar reaction activated through specific character passives and scales with Elemental Mastery.",
+                type: "Lunar"
+            },
+            {
+                name: "Lunar-Crystallize",
+                element: ["Geo", "Hydro"],
+                effect: "This is a Lunar reaction activated through specific character passives and scales with Elemental Mastery.",
+                type: "Lunar"
+            },
+            {
+                name: "Melt",
+                element: ["Cryo", "Pyro"],
+                multiplier: {
+                    pyro: 2.0,
+                    cryo: 1.5
+                },
+                type: "Amplifying"
+            },
+            {
+                name: "Overloaded",
+                element: ["Electro", "Pyro"],
+                effect: "This deals AoE Pyro damage and knocks smaller enemies back.",
+                type: "Transformative"
+            },
+            {
+                name: "Quicken",
+                element: ["Dendro", "Electro"],
+                effect: "This applies the Quicken status, allowing subsequent Electro attacks to trigger Aggravate and Dendro attacks to trigger Spread.",
+                type: "Catalyze"
+            },
+            {
+                name: "Spread",
+                element: ["Dendro", "Electro"],
+                effect: "This adds bonus damage to Dendro attacks against enemies affected by Quicken.",
+                type: "Amplifying"
+            },
+            {
+                name: "Stellar-Conduct",
+                element: ["Cryo", "Electro"],
+                effect: "This is a Stellar Glimmer reaction that scales with Stellar Jubilee Passives and is affected by enemy RES.",
+                type: "Stellar Glimmer"
+            },
+            {
+                name: "Stellar-Swirl",
+                element: ["Anemo", "Cryo", "Electro", "Hydro", "Pyro"],
+                effect: "This is a Stellar Glimmer reaction that scales with Stellar Jubilee Passives and is affected by enemy RES.",
+                type: "Stellar Glimmer"
+            },
+            {
+                name: "Superconduct",
+                element: ["Cryo", "Electro"],
+                effect: "This deals AoE Cryo damage and reduces enemy Physical RES by 40% for 12 seconds.",
+                type: "Transformative"
+            },
+            {
+                name: "Swirl",
+                element: ["Anemo", "Cryo", "Electro", "Hydro", "Pyro"],
+                effect: "This spreads the existing Cryo, Electro, Hydro, or Pyro element to nearby enemies and deals additional Anemo damage. The Viridescent Venerer artifact set can reduce resistance to the Swirled element by 40%.",
+                type: "Transformative"
+            },
+            {
+                name: "Vaporize",
+                element: ["Hydro", "Pyro"],
+                multiplier: {
+                    hydro: 2.0,
+                    pyro: 1.5
+                },
+                type: "Amplifying"
+            }
+        ];
+
+        var elElement = document.getElementById("paElement");
+
+        for (var i = 0; i < element.length; i++) {
+            var reactionList = element[i].reactions.map(function (reaction) {
+                return `<span class="badge text-bg-secondary me-1 mb-1">${reaction}</span>`;
+            }).join("");
+            elElement.innerHTML +=
+                `<div class="col-lg-6 col-sm-12">
+                    <div class="card h-100 d-flex flex-column">
+                        <div class="card-img d-flex justify-content-center" style="width: auto; height: 300px;">
+                            <img src="assets/element_svg/`+ element[i].svg + `.svg" alt="` + element[i].name + `icon">
+                        </div>
+                        <div class="card-title">
+                            <div class="text-center h3">`+ element[i].name + `</div>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <div class="p-2">` + element[i].description + `</div>
+                            <div class="mt-auto" style="height: 120px">
+                                <hr>
+                                <div class="mb-2">Reactions involved</div>
+                                <div class="px-2">` + reactionList + `</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`
+        };
+
+        var nations = [
+            {
+                name: "Fontaine",
+                element: "Hydro",
+                ideal: "Justice",
+                archon: "Focalors",
+                representative: "Furina",
+                capital: "Court of Fontaine",
+                description: "A nation known for its justice system, court trials, advanced technology, and strong connection to water."
+            },
+            {
+                name: "Inazuma",
+                element: "Electro",
+                ideal: "Eternity",
+                archon: "Beelzebul",
+                representative: "Raiden Ei",
+                capital: "Inazuma City",
+                description: "An island nation inspired by Japanese culture, known for its traditions, shrines, and history of isolation."
+            },
+            {
+                name: "Liyue",
+                element: "Geo",
+                ideal: "Contracts",
+                archon: "Morax",
+                representative: "Zhongli",
+                capital: "Liyue Harbor",
+                description: "A nation inspired by Chinese culture, known for its commerce, mountains, traditions, and emphasis on contracts."
+            },
+            {
+                name: "Mondstadt",
+                element: "Anemo",
+                ideal: "Freedom",
+                archon: "Barbatos",
+                representative: "Venti",
+                capital: "Mondstadt City",
+                description: "A nation inspired by Germanic and European cultures, known for its windmills, vineyards, and emphasis on freedom."
+            },
+            {
+                name: "Natlan",
+                element: "Pyro",
+                ideal: "War",
+                archon: "Pyro Archon",
+                representative: "Mavuika",
+                capital: "Stadium of the Sacred Flame",
+                description: "A nation of tribes, warriors, and tournaments, known for its fiery landscapes and strong sense of community."
+            },
+            {
+                name: "Snezhnaya",
+                element: "Cryo",
+                ideal: "Love",
+                archon: "Tsaritsa",
+                representative: "Tsaritsa",
+                capital: "Snezhnograd",
+                description: "A cold northern nation known for its harsh climate and the Fatui, a powerful organization operating across Teyvat."
+            },
+            {
+                name: "Sumeru",
+                element: "Dendro",
+                ideal: "Wisdom",
+                archon: "Buer",
+                representative: "Nahida",
+                capital: "Sumeru City",
+                description: "A nation of forests and deserts, known for its Akademiya, scholars, research, and pursuit of knowledge."
+            }
+        ];
+    </script>
+</body>
+
+</html>
