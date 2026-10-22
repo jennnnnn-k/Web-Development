@@ -4,15 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bento Layout</title>
+    <title>GI Archives</title>
+    <link href="assets/primogem.png" rel="icon" type="image/png">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <style>
+        body {
+            background: linear-gradient(to top, #C8E5F5, #FFF6E5);
+            background-attachment: fixed;
+        }
+
+        .card {
+            background-color: rgba(255, 255, 255, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.7);
+        }
+    </style>
 </head>
 
 <body>
-    <div class="navbar navbar-expand-lg px-3">
-        <div class="navbar-brand">
-            Genshin Impact
+    <div class="navbar navbar-expand-lg p-3">
+        <div class="navbar-brand fw-bold">
+            Genshin Impact Archive
         </div>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
@@ -21,27 +33,43 @@
         </button>
 
         <div class="collapse navbar-collapse" id="mainNav">
-            <div class="navbar-nav mb-2 mb-lg-0 gap-lg-3">
-                <a class="nav-link active" href="#">Home</a>
-                <a class="nav-link" href="#">Elements</a>
+            <div class="navbar-nav mb-2 mb-lg-0 gap-lg-3 ms-auto">
+                <a class="nav-link" href="#">Home</a>
+                <a class="nav-link active" href="#">Elements</a>
                 <a class="nav-link" href="#">Weapons</a>
+                <a class="nav-link" href="https://genshin.hoyoverse.com/en/home" target="_blank">Download</a>
             </div>
         </div>
     </div>
 
     <div class="container">
         <div class="card shadow p-3 my-3">
-            <div class="card-img">
-                <img src="" alt="">
-            </div>
             <div class="card-title h2 text-center">Elements</div>
             <hr>
-            <div class="card-body"></div>
+            <div class="card-body" style="text-indent: 50px;">In <em>Genshin Impact</em>, Elements are special powers
+                that characters use to attack enemies, explore the world, and trigger elemental reactions. There are
+                seven main elements: <strong>Anemo, Geo, Electro, Dendro, Hydro, Pyro,</strong>and
+                <strong>Cryo</strong>. Each element has unique abilities and can interact with others to create powerful
+                effects in combat.</div>
         </div>
-        <div class="row g-3" id="paElement">
+
+        <div class="row g-3" id="pa_element">
             <!-- element -->
         </div>
     </div>
+
+    <div class="text-center py-4 mt-5" style="background-color: #b7e6ff;">
+        <div class="h5">Genshin Impact Archive</div>
+        <div class="mb-2">Explore the world of Teyvat, one element at a time.</div>
+        <div class="small text-muted">
+            Fan-made project for educational purposes. Not affiliated with HoYoverse.
+        </div>
+        <hr>
+        <div class="small text-muted mt-2">
+            &copy; 2026 Genshin Impact Archive
+        </div>
+    </div>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
@@ -53,43 +81,50 @@
                 name: "Anemo",
                 svg: "Element_Anemo",
                 reactions: ["Stellar-Swirl", "Swirl"],
+                color: "#74C2A8",
                 description: "Anemo does not leave a persistent aura on enemies but instead spreads existing elements through Swirl. It can Swirl Pyro, Hydro, Cryo, and Electro, spreading their effects to nearby enemies and dealing additional elemental damage."
             },
             {
                 name: "Cryo",
                 svg: "Element_Cryo",
                 reactions: ["Crystallize", "Frozen", "Lunar-Crystallize", "Melt", "Stellar-Conduct", "Superconduct", "Swirl"],
-                description: "Cryo applies Cryo to enemies and is useful for freezing opponents and increasing damage. It triggers Melt (Cryo + Pyro), which increases damage; Superconduct (Cryo + Electro), which deals AoE Cryo damage and reduces Physical RES; and Frozen (Cryo + Hydro), which immobilizes enemies. Frozen enemies can also trigger Shatter when hit by blunt attacks, dealing Physical damage."
+                color: "#9FE8F5",
+                description: "Cryo applies Cryo to enemies and is useful for freezing opponents and increasing damage. It triggers Melt, which increases damage; Superconduct, which deals AoE Cryo damage and reduces Physical RES; and Frozen, which immobilizes enemies. Frozen enemies can also trigger Shatter when hit by blunt attacks, dealing Physical damage."
             },
             {
                 name: "Dendro",
                 svg: "Element_Dendro",
                 reactions: ["Aggravate", "Bloom", "Burning", "Burgeon", "Hyperbloom", "Lunar-Bloom", "Quicken", "Spread"],
-                description: "Dendro interacts with Pyro, Hydro, and Electro to trigger several reactions. It triggers Burning (Dendro + Pyro), which deals continuous Pyro damage; Bloom (Dendro + Hydro), which creates Dendro Cores; and Quicken (Dendro + Electro), which enables Aggravate and Spread to increase Electro and Dendro damage, respectively. Bloom can also trigger Hyperbloom (Dendro Core + Electro), which creates homing projectiles, and Burgeon (Dendro Core + Pyro), which causes the cores to explode."
+                color: "#A5C83B",
+                description: "Dendro interacts with Pyro, Hydro, and Electro to trigger several reactions. It triggers Burning, which deals continuous Pyro damage; Bloom, which creates Dendro Cores; and Quicken, which enables Aggravate and Spread to increase Electro and Dendro damage, respectively. Bloom can also trigger Hyperbloom, which creates homing projectiles, and Burgeon, which causes the cores to explode."
             },
             {
                 name: "Electro",
                 svg: "Element_Electro",
                 reactions: ["Aggravate", "Crystallize", "Electrocharged", "Hyperbloom", "Lunar-Charged", "Overloaded", "Quicken", "Spread", "Stellar-Conduct", "Superconduct", "Swirl"],
-                description: "Electro applies Electro to enemies and supports several elemental reactions. It triggers Overloaded (Electro + Pyro), which causes an explosion; Electro-Charged (Electro + Hydro), which deals continuous Electro damage; and Superconduct (Electro + Cryo), which deals AoE Cryo damage and reduces Physical RES. With Dendro, it triggers Quicken, which enables Aggravate to increase Electro damage and Spread to increase Dendro damage."
+                color: "#B48BEA",
+                description: "Electro applies Electro to enemies and supports several elemental reactions. It triggers Overloaded, which causes an explosion; Electro-Charged, which deals continuous Electro damage; and Superconduct, which deals AoE Cryo damage and reduces Physical RES. With Dendro, it triggers Quicken, which enables Aggravate to increase Electro damage and Spread to increase Dendro damage."
             },
             {
                 name: "Geo",
                 svg: "Element_Geo",
                 reactions: ["Crystallize", "Lunar-Crystallize"],
+                color: "#F2B93B",
                 description: "Geo triggers Crystallize when combined with Pyro, Hydro, Electro, or Cryo, creating elemental shards that provide shields when collected. Although it cannot be Swirled and has limited elemental reactions, it is useful for defensive teams because of its shielding capabilities."
             },
             {
                 name: "Hydro",
                 svg: "Element_Hydro",
                 reactions: ["Bloom", "Crystallize", "Electrocharged", "Frozen", "Lunar-Bloom", "Lunar-Charged", "Lunar-Crystallize", "Vaporize"],
-                description: "Hydro applies the Wet status to enemies and enables reactions such as Vaporize (Hydro + Pyro), which increases damage; Electro-Charged (Hydro + Electro), which deals continuous Electro damage; Frozen (Hydro + Cryo), which immobilizes enemies; and Bloom (Hydro + Dendro), which creates Dendro Cores that can explode or trigger additional reactions."
+                color: "#4CC2F1",
+                description: "Hydro applies the Wet status to enemies and enables reactions such as Vaporize, which increases damage; Electro-Charged, which deals continuous Electro damage; Frozen, which immobilizes enemies; and Bloom, which creates Dendro Cores that can explode or trigger additional reactions."
             },
             {
                 name: "Pyro",
                 svg: "Element_Pyro",
                 reactions: ["Burning", "Burgeon", "Crystallize", "Melt", "Overloaded", "Swirl", "Vaporize"],
-                description: "Pyro applies the Burning effect to enemies and is one of the main elements for dealing damage. It triggers reactions such as Vaporize (Pyro + Hydro), which increases damage; Melt (Pyro + Cryo), which increases damage; Overloaded (Pyro + Electro), which causes an explosion; and Burning (Pyro + Dendro), which deals continuous Pyro damage."
+                color: "#FF7043",
+                description: "Pyro applies the Burning effect to enemies and is one of the main elements for dealing damage. It triggers reactions such as Vaporize, which increases damage; Melt, which increases damage; Overloaded, which causes an explosion; and Burning, which deals continuous Pyro damage."
             }
         ];
 
@@ -222,98 +257,34 @@
             }
         ];
 
-        var elElement = document.getElementById("paElement");
+        var el_element = document.getElementById("pa_element");
 
         for (var i = 0; i < element.length; i++) {
-            var reactionList = element[i].reactions.map(function (reaction) {
-                return `<span class="badge text-bg-secondary me-1 mb-1">${reaction}</span>`;
+            var color = element[i].color;
+            var reaction_list = element[i].reactions.map(function (reaction) {
+                return `<span class="badge me-1 mb-1" style="background-color:` + color + `;">${reaction}</span>`;
             }).join("");
-            elElement.innerHTML +=
+            el_element.innerHTML +=
                 `<div class="col-lg-6 col-sm-12">
-                    <div class="card h-100 d-flex flex-column">
-                        <div class="card-img d-flex justify-content-center" style="width: auto; height: 300px;">
-                            <img src="assets/element_svg/`+ element[i].svg + `.svg" alt="` + element[i].name + `icon">
-                        </div>
-                        <div class="card-title">
-                            <div class="text-center h3">`+ element[i].name + `</div>
+                    <div class="card shadow h-100 d-flex flex-row p-3">
+                        <div class="d-flex align-items-center justify-content-center" style="width: 35%;">
+                            <img src="assets/element_svg/` + element[i].svg + `.svg" alt="` + element[i].name + ` icon"
+                            style="width: 175px; height: 175px; object-fit: contain;">
                         </div>
                         <div class="card-body d-flex flex-column">
-                            <div class="p-2">` + element[i].description + `</div>
-                            <div class="mt-auto" style="height: 120px">
+                            <h3 class="text-center">` + element[i].name + `</h3>
+                            <div style="text-indent: 30px;">` + element[i].description + `</div>
+                            <div class="mt-auto p-3" style="height: 150px;">
                                 <hr>
-                                <div class="mb-2">Reactions involved</div>
-                                <div class="px-2">` + reactionList + `</div>
+                                <div class="text-center h6">Reactions involved</div>
+                                <div>` + reaction_list + `</div>
                             </div>
                         </div>
                     </div>
                 </div>`
         };
 
-        var nations = [
-            {
-                name: "Fontaine",
-                element: "Hydro",
-                ideal: "Justice",
-                archon: "Focalors",
-                representative: "Furina",
-                capital: "Court of Fontaine",
-                description: "A nation known for its justice system, court trials, advanced technology, and strong connection to water."
-            },
-            {
-                name: "Inazuma",
-                element: "Electro",
-                ideal: "Eternity",
-                archon: "Beelzebul",
-                representative: "Raiden Ei",
-                capital: "Inazuma City",
-                description: "An island nation inspired by Japanese culture, known for its traditions, shrines, and history of isolation."
-            },
-            {
-                name: "Liyue",
-                element: "Geo",
-                ideal: "Contracts",
-                archon: "Morax",
-                representative: "Zhongli",
-                capital: "Liyue Harbor",
-                description: "A nation inspired by Chinese culture, known for its commerce, mountains, traditions, and emphasis on contracts."
-            },
-            {
-                name: "Mondstadt",
-                element: "Anemo",
-                ideal: "Freedom",
-                archon: "Barbatos",
-                representative: "Venti",
-                capital: "Mondstadt City",
-                description: "A nation inspired by Germanic and European cultures, known for its windmills, vineyards, and emphasis on freedom."
-            },
-            {
-                name: "Natlan",
-                element: "Pyro",
-                ideal: "War",
-                archon: "Pyro Archon",
-                representative: "Mavuika",
-                capital: "Stadium of the Sacred Flame",
-                description: "A nation of tribes, warriors, and tournaments, known for its fiery landscapes and strong sense of community."
-            },
-            {
-                name: "Snezhnaya",
-                element: "Cryo",
-                ideal: "Love",
-                archon: "Tsaritsa",
-                representative: "Tsaritsa",
-                capital: "Snezhnograd",
-                description: "A cold northern nation known for its harsh climate and the Fatui, a powerful organization operating across Teyvat."
-            },
-            {
-                name: "Sumeru",
-                element: "Dendro",
-                ideal: "Wisdom",
-                archon: "Buer",
-                representative: "Nahida",
-                capital: "Sumeru City",
-                description: "A nation of forests and deserts, known for its Akademiya, scholars, research, and pursuit of knowledge."
-            }
-        ];
+
     </script>
 </body>
 
