@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" data-bs-theme="light">
+
+<head>
+    <title>GI Archives</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous" />
+    <style>
+        body {
+            background-image: url("assets/background.webp");
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            min-height: 100vh;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="navbar navbar-expand-lg navbar-dark px-3 bg-dark bg-opacity-50 mb-5"
+        style="backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);">
+        <a class="navbar-brand text-white" href="#"
+            style="font-family: 'Parisienne', cursive; font-size: clamp(28px, 4vw, 36px);">
+            GI Archives
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav"
+            aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="mainNav">
+            <div class="navbar-nav ms-auto mb-2 mb-lg-0 gap-lg-3">
+                <a class="nav-link active" href="#">Home</a>
+                <a class="nav-link" href="#">Characters</a>
+                <a class="nav-link" href="#">Weapons</a>
+                <a class="nav-link" href="#">Artifacts</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="card p-3 bg-dark bg-opacity-50" style="backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);">
+            <div class="row">
+                <div class="col-4">
+                    <div class="card p-5 h-100">
+
+                    </div>
+                </div>
+                <div class="col-8">
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <div class="card p-5">
+                                
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="card p-5">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script>
+        const get_genshin = async () => {
+            const response = await fetch('https://genshin.jmp.blue' + inSearchInput.value);
+            const pokemon = await response.json();
+        }
+
+        get_genshin()
+    </script>
+</body>
+
+</html>
