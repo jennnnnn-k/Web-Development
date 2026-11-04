@@ -11,10 +11,22 @@
         rel="stylesheet">
 
     <style>
-        /* #F47721(outlines) #171717(background) #292929(cards) #F5F5F5(header texts) #A6A6A6(info texts) */
+        /* #F47721(outlines)*/
         body {
             font-family: 'Poppins', sans-serif;
             background-color: #171717;
+        }
+
+        .card {
+            background-color: #292929;
+        }
+
+        .title {
+            color: #F5F5F5;
+        }
+
+        .desc {
+            color: #A6A6A6;
         }
 
         .hover:hover {
@@ -40,26 +52,27 @@
     </div>
 
     <div class="container py-4">
-        <div class="card mb-3" style="background-color: #292929;">
+        <div class="card mb-3">
             <img class="card-img-top" src="assets/banner.jpg" alt="banner image">
-            <div class="h1 text-center mt-3" style="color: #F5F5F5;">Welcome to the Haikyuu!! Character Archive!
+            <div class="h1 text-center mt-3 title">Welcome to the Haikyuu!! Character Archive!
             </div>
-            <div class="px-4 py-3" style="color: #A6A6A6; text-indent: 40px;">Ready to meet your favorite
+            <div class="px-4 py-3 desc" style="text-indent: 90px;">Ready to meet your favorite
                 volleyball players? Explore the world of Haikyuu!! and discover the characters who make every
                 match unforgettable. Search for your favorite characters, learn more about their backgrounds,
                 personalities, positions, schools, and other interesting details. Your favorite players, all in
                 one place. Let the game begin! </div>
         </div>
 
-        <div class="card p-3" style="background-color: #292929;">
-            <div class="card-title text-center text-white h2" style="color: #F5F5F5;">Characters</div>
+        <div class="card p-3">
+            <div class="card-title text-center text-white h2 title">Characters</div>
             <hr style="border-color: #F47721; border-width: 3px;" id="Characters">
             <div class="row" id="parent"></div>
 
             <div class="d-flex justify-content-center mt-3">
                 <ul class="pagination">
                     <li class="page-item" onclick="prev()">
-                        <a class="page-link bg-dark border-warning text-warning" href="#Characters" aria-label="Previous">
+                        <a class="page-link bg-dark border-warning text-warning" href="#Characters"
+                            aria-label="Previous">
                             <span aria-hidden="true">&laquo;</span>
                         </a>
                     </li>
@@ -78,7 +91,7 @@
     <div class="text-center pb-3 mt-5" style="background-color: #292929; color: #F5F5F5;">
         <img src="assets/logo.png" alt="logo" class="" style="width: 250px; height: 100px;">
         <div class="h5" style="color: #F47721;">Haikyuu!! Archives</div>
-        <div class="mb-2" style="color: #A6A6A6;">Explore the world of volleyball, one player at a time.</div>
+        <div class="mb-2" style="color: #A6A6A6;">飛べ fly high!</div>
         <div class="small" style="color: #A6A6A6;">
             Fan-made project for educational purposes. Not affiliated with Haruichi Furudate or the anime production
             committee.
@@ -89,7 +102,6 @@
         </div>
     </div>
 
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
         crossorigin="anonymous"></script>
@@ -99,13 +111,16 @@
         var el_parent = document.getElementById("parent");
         var in_search_input = document.getElementById("search_input");
 
-        var page = 1;
+        const query_string = window.location.search;
+        const url_params = new URLSearchParams(query_string);
+
+        var page = parseInt(url_params.get('page')) || 1;
         var per_page = 20;
 
         var all_characters = [];
         var filtered_characters = [];
 
-        const load_characters = async () => {
+        const get_character = async () => {
 
             var api_page = 1;
             var has_next_page = true;
@@ -191,6 +206,14 @@
 
             var final_page = Math.ceil(filtered_characters.length / per_page);
 
+            if (page > final_page) {
+                page = final_page;
+            }
+
+            if (page < 1) {
+                page = 1;
+            }
+
             el_current_page.innerHTML = page;
 
             var start = (page - 1) * per_page;
@@ -209,20 +232,21 @@
 
             characters.forEach(character => {
 
+                var id = character.id;
                 var image = character.image.large;
                 var name = character.name.full;
 
                 el_parent.innerHTML += `
                     <div class="col-sm-6 col-lg-3 mb-3">
-                        <a href="view/view.html?name=${name}" style="text-decoration: none;">
+                        <a href="view/view.html?page=`+ page +`&id=`+ id +`" style="text-decoration: none;">
                             <div class="card border-0 h-100 hover">
 
-                                <img src="${image}" class="card-img-top" style="width: 100%; height: 350px; object-fit: cover;">
+                                <img src="`+ image +`" class="card-img-top" style="width: 100%; height: 350px; object-fit: cover;">
 
                                 <div style="position: absolute; bottom: 0; left: 0; width: 100%; padding: 40px 15px 15px;   background: linear-gradient(transparent, rgba(0, 0, 0, 0.9));">
 
                                     <div class="h5 text-center" style="color: #A6A6A6;">
-                                        ${name}
+                                        `+ name +`
                                     </div>
 
                                 </div>
@@ -279,7 +303,7 @@
             display_characters();
         }
 
-        load_characters();
+        get_character();
 
     </script>
 
